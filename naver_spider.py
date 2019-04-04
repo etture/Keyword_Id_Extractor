@@ -11,6 +11,7 @@ from bs4 import BeautifulSoup
 import urllib.parse as urlparse
 import time
 from stopit import ThreadingTimeout as Timeout, TimeoutException
+from mutt_module import send_mail
 
 
 class NaverSpider(scrapy.Spider):
@@ -294,6 +295,9 @@ if __name__ == "__main__":
 
     start = time.time()
     now = time.localtime()
+    hour_str = now.tm_hour if now.tm_hour > 9 else '0{0}'.format(str(now.tm_hour))
+    min_str = now.tm_min if now.tm_min > 9 else '0{0}'.format(str(now.tm_min))
+
     process.crawl(NaverSpider, keywords=keywords_list, target_id_count=id_count)
     process.start()
 
@@ -310,14 +314,23 @@ if __name__ == "__main__":
 
     search_keyword = '_'.join(keywords_list[0].split(" "))
 
-    with open('./results/{2}-{3}-{4}-{5}-{6}_{0}_{1}_total.txt'
-                      .format(search_keyword, id_count, now.tm_year,
-                              now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min), 'w') as f:
+    total_file_name = './results/{2}-{3}-{4}-{5}-{6}_{0}_{1}_total.txt'\
+        .format(search_keyword, id_count, now.tm_year, now.tm_mon, now.tm_mday, hour_str, min_str)
+    np_file_name = './results/{2}-{3}-{4}-{5}-{6}_{0}_{1}_np.txt'\
+        .format(search_keyword, id_count, now.tm_year, now.tm_mon, now.tm_mday, hour_str, min_str)
+
+    with open(total_file_name, 'w') as f:
         for all_id in all_ids:
             f.write('{0}\n'.format(all_id))
 
-    with open('./results/{2}-{3}-{4}-{5}-{6}_{0}_{1}_np.txt'
-                      .format(search_keyword, id_count, now.tm_year,
-                              now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min), 'w') as f:
+    with open(np_file_name, 'w') as f:
         for np_id in np_ids:
             f.write('{0}\n'.format(np_id))
+
+    # 결과 파일들 이메일로 전송
+    send_mail(
+        recipient_list=['etture@gmail.com'],
+        subject_line='블로그 아이디 크롤링 - 키워드: "{0}", 타겟: {1}, {2}/{3}/{4} {5}:{6}'.format(search_keyword, id_count, now.tm_year, now.tm_mon, now.tm_mday, hour_str, min_str),
+        message='',
+        attachment_files=[total_file_name, np_file_name]
+    )
