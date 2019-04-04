@@ -248,10 +248,7 @@ class ItemCollectorPipeline(object):
     def process_item(self, item, spider):
         scraped_obj_container = []
 
-        if item['is_list']:
-            scraped_obj_container = item['ids_list']
-        else:
-            scraped_obj_container.append(item)
+        scraped_obj_container.append(item)
 
         for scraped_obj in scraped_obj_container:
             if scraped_obj['user_id'] in self.ids_seen:
