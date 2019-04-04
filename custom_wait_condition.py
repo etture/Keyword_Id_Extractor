@@ -12,7 +12,6 @@ class wait_for_attribute_value_regex(object):
     def __call__(self, driver):
         try:
             element_attribute = EC._find_element(driver, self.locator).get_attribute(self.attribute)
-            # print('element_attribute: ' + element_attribute + ', match: ' + str(re.match(self.regex, element_attribute)))
             return re.match(self.regex, element_attribute)
         except StaleElementReferenceException:
             return False
