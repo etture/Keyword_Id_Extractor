@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c9413d04-59a6-41d2-aea9-9d2552b9d9db" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/custom_wait_condition.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/naver_crawler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/web_scraper.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/web_scraper.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/naver.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/naver_spider.py" beforeDir="false" afterPath="$PROJECT_DIR$/naver_spider.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,8 +15,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/naver_crawler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="64" lean-forward="true" selection-start-line="7" selection-start-column="64" selection-end-line="7" selection-end-column="64" />
+            <state relative-caret-position="190">
+              <caret line="159" lean-forward="true" selection-start-line="159" selection-end-line="159" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
               </folding>
@@ -46,8 +39,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/naver_spider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="340" lean-forward="true" selection-start-line="340" selection-end-line="340" />
+            <state relative-caret-position="279">
+              <caret line="325" column="17" lean-forward="true" selection-start-line="325" selection-start-column="17" selection-end-line="325" selection-end-column="17" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -84,6 +77,10 @@
       <find>/DomainDispatcher.nhn?blogId=seagreen0314&amp;id=bazellove&amp;type=log&amp;subName=blog</find>
       <find>DomainDispat</find>
       <find>except Timeout</find>
+      <find>np_item</find>
+      <find>parse_comments</find>
+      <find>URL</find>
+      <find>URL:</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -97,13 +94,13 @@
         <option value="$PROJECT_DIR$/naver_1.py" />
         <option value="$PROJECT_DIR$/selenium_ex.py" />
         <option value="$PROJECT_DIR$/naver_2.py" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/args_pr.py" />
         <option value="$PROJECT_DIR$/naver.py" />
         <option value="$PROJECT_DIR$/custom_wait_condition.py" />
-        <option value="$PROJECT_DIR$/naver_crawler.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/naver_crawler.py" />
         <option value="$PROJECT_DIR$/naver_spider.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -123,6 +120,11 @@
             <path>
               <item name="web_scraper" type="b2602c69:ProjectViewProjectNode" />
               <item name="web_scraper" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web_scraper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web_scraper" type="462c0819:PsiDirectoryNode" />
+              <item name="results" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -245,12 +247,12 @@
       <updated>1554030954869</updated>
       <workItem from="1554030958554" duration="101000" />
       <workItem from="1554031111930" duration="32869000" />
-      <workItem from="1554268258367" duration="23585000" />
+      <workItem from="1554268258367" duration="30735000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56555000" />
+    <option name="totallyTimeSpent" value="63705000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -264,12 +266,12 @@
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1631664" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2924071" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32876712" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49919224" visible="true" weight="0.40547946" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49919224" weight="0.37260273" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -278,7 +280,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50080776" side_tool="true" weight="0.32876712" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.39041096" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.39041096" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.3739726" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -294,8 +296,8 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/web_scraper$args_pr.coverage" NAME="args_pr Coverage Results" MODIFIED="1554270728276" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/web_scraper$selenium_ex.coverage" NAME="naver_crawler Coverage Results" MODIFIED="1554310651141" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/web_scraper$naver_2.coverage" NAME="naver_spider Coverage Results" MODIFIED="1554335766620" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/web_scraper$selenium_ex.coverage" NAME="naver_crawler Coverage Results" MODIFIED="1554343754266" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/web_scraper$naver_2.coverage" NAME="naver_spider Coverage Results" MODIFIED="1554344439333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/scrapy_tutorial.py">
@@ -322,13 +324,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scraper.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="265">
@@ -350,16 +345,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/naver_crawler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="64" lean-forward="true" selection-start-line="7" selection-start-column="64" selection-end-line="7" selection-end-column="64" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/custom_wait_condition.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -377,10 +362,102 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/hi.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hello.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iPad_10.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/아이폰XS_20_total_2019-4-4.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/아이폰XS_20_np_2019-4-4.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/맥북_15_total_2019-4-4-10-42.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="9" lean-forward="true" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/맥북_15_np_2019-4-4-10-42.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/아이패드_30_np_2019-4-4-10-34.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/아이패드_30_total_2019-4-4-10-34.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/맥북_1500_total_2019-4-4-10-43.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="28" column="6" lean-forward="true" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/맥북_1500_np_2019-4-4-10-43.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/아이패드_30_np_2019-4-4-11-10.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="8" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/2019-4-4-11-12_맥북_50_np.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/2019-4-4-11-19_맥북_프로_10_total.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/2019-4-4-11-19_맥북_프로_10_np.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/naver_crawler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="159" lean-forward="true" selection-start-line="159" selection-end-line="159" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/2019-4-4-11-20_맥북_프로_1500_total.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="1055" column="10" lean-forward="true" selection-start-line="1055" selection-start-column="10" selection-end-line="1055" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/2019-4-4-11-20_맥북_프로_1500_np.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="1045" column="9" lean-forward="true" selection-start-line="1045" selection-start-column="9" selection-end-line="1045" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/naver_spider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="340" lean-forward="true" selection-start-line="340" selection-end-line="340" />
+        <state relative-caret-position="279">
+          <caret line="325" column="17" lean-forward="true" selection-start-line="325" selection-start-column="17" selection-end-line="325" selection-end-column="17" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>

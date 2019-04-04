@@ -14,7 +14,6 @@ from stopit import ThreadingTimeout as Timeout, TimeoutException
 
 
 class NaverSpider(scrapy.Spider):
-
     name = 'naver_spider'
 
     def __init__(self, keywords=[''], target_id_count=100):
@@ -176,37 +175,6 @@ class NaverSpider(scrapy.Spider):
                 callback=self.parse
             )
 
-    def parse_comments(self, commenter_urls):
-        # 개별 댓글 작성자마다 블로그로 들어가서 아아디 추출
-        for commenter_url in commenter_urls:
-            # 목표한 아이디 개수가 채워졌으면 크롤러 종료
-            if self.close_down:
-                raise CloseSpider(reason='목표 아이디 개수 달성')
-
-            ids_list = []
-
-            # 개별 블로그에서 아이디 추출, 글 게시자=False (댓글 작성자이기 때문)
-            try:
-                with Timeout(15.0) as timeout_ctx:
-                    ids_list.append(self.get_id_from_blog(blog_url=commenter_url, original_poster=False))
-            except TimeoutException:
-                print('TimeoutException')
-                continue
-            except AttributeError:
-                print('AttributeError')
-                continue
-            except NoSuchElementException:
-                print('NoSuchElementException')
-                continue
-            except BaseException:
-                print('BaseException')
-                continue
-
-            return {
-                'is_list': True,
-                'ids_list': ids_list
-            }
-
     def get_id_from_blog(self, blog_url, original_poster=True):
         # 네이버 모듈에서 개별 블로그에서 유저 아이디 찾기 호출
         try:
@@ -226,7 +194,6 @@ class NaverSpider(scrapy.Spider):
             raise BaseException
 
         return {
-            'is_list': False,
             'user_id': user_id,
             'original_poster': original_poster
         }
@@ -329,12 +296,31 @@ if __name__ == "__main__":
         break
 
     start = time.time()
+    now = time.localtime()
     process.crawl(NaverSpider, keywords=keywords_list, target_id_count=id_count)
     process.start()
 
     end = time.time()
-    print("Aggregate: " + str(items) + ", length: " + str(len(items)))
-    print("Distinct: " + str(list(set([item['user_id'] for item in items]))) + ", length: " + str(len(set([item['user_id'] for item in items]))))
-    print("Non-Poster: " + str(list(set(([item['user_id'] for item in items if item['original_poster'] == False]))) + ", length: " + str(len(set([item['user_id'] for item in items])))))
 
-    print("Total time taken: " + str(end-start) + " seconds")
+    all_ids = [item['user_id'] for item in items]
+    np_ids = [item['user_id'] for item in items if item['original_poster'] is not True]
+
+    print("Aggregate: " + str(items) + ", length: " + str(len(items)))
+    print("Distinct: " + str(all_ids) + ", length: " + str(len(all_ids)))
+    print("Non-Poster: " + str(np_ids) + ", length: " + str(len(np_ids)))
+
+    print("Total time taken: " + str(end - start) + " seconds")
+
+    search_keyword = '_'.join(keywords_list[0].split(" "))
+
+    with open('./results/{2}-{3}-{4}-{5}-{6}_{0}_{1}_total.txt'
+                      .format(search_keyword, id_count, now.tm_year,
+                              now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min), 'w') as f:
+        for all_id in all_ids:
+            f.write('{0}\n'.format(all_id))
+
+    with open('./results/{2}-{3}-{4}-{5}-{6}_{0}_{1}_np.txt'
+                      .format(search_keyword, id_count, now.tm_year,
+                              now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min), 'w') as f:
+        for np_id in np_ids:
+            f.write('{0}\n'.format(np_id))

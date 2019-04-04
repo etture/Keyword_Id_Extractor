@@ -55,7 +55,7 @@ def get_commenter_urls(driver, blog_url):
 
     # 댓글 버튼 눌러서 댓글 창 펼치기
     driver.find_element_by_class_name('btn_comment').click()
-    WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.CLASS_NAME, 'u_cbox_info_main')))
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'u_cbox_info_main')))
 
     html = driver.page_source
     soup = BeautifulSoup(html, 'html.parser')
@@ -91,7 +91,7 @@ def get_sympathy_urls(driver, blog_url):
 
     # 댓글 버튼 눌러서 댓글 창 펼치기
     driver.find_element_by_class_name('btn_arr').click()
-    WebDriverWait(driver, 3).until(wait_for_attribute_value_regex((By.XPATH, "//iframe[@title='엮인글']"), 'style', r'^(display: inline;)'))
+    WebDriverWait(driver, 10).until(wait_for_attribute_value_regex((By.XPATH, "//iframe[@title='엮인글']"), 'style', r'^(display: inline;)'))
 
     html = driver.page_source
     soup = BeautifulSoup(html, 'html.parser')
@@ -110,7 +110,34 @@ def get_sympathy_urls(driver, blog_url):
     all_sympathies = sympathy_area.find_all('strong', class_='nick')
 
     # 블로그 주소 형태에 맞게 처리해서 리스트에 넣기
-    sympathy_urls = [blog_url_process(sympathy.find('a', class_='pcol2')['href']) for sympathy in all_sympathies]
+    sympathy_urls = []
+    sympathy_urls.extend(
+        [blog_url_process(sympathy.find('a', class_='pcol2')['href'])
+         for sympathy in all_sympathies]
+    )
+
+    pagination = soup.find_all('a', class_='page pcol2')
+
+    # 공감이 많을 때 여러 페이지에 나뉘어 있는 경우, 각각 페이지 접속 후 블로그 URL 추출
+    for page_btn in pagination:
+        element = driver.find_element_by_xpath("//a[@href='{0}']".format(page_btn['href']))
+        driver.execute_script("arguments[0].click();", element)
+
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//strong[@class='page pcol3']")))
+
+        page_html = driver.page_source
+        page_soup = BeautifulSoup(page_html, 'html.parser')
+
+        # 공감을 담고 있는 부분 전체
+        page_sympathy_area = page_soup.find('ul', class_='list_sympathy')
+
+        # 개별 공감 칸 추출
+        page_all_sympathies = page_sympathy_area.find_all('strong', class_='nick')
+
+        sympathy_urls.extend(
+            [blog_url_process(sympathy.find('a', class_='pcol2')['href'])
+             for sympathy in page_all_sympathies]
+        )
 
     return sympathy_urls
 
@@ -134,4 +161,4 @@ if __name__ == "__main__":
     driver = webdriver.Chrome(driver_location, options=options)
     # print(get_naver_blog_id(driver, 'https://blog.naver.com/DomainDispatcher.nhn?blogId=seagreen0314&id=mayjeong94&type=log&subName=blog'))
     # print(get_commenter_urls(driver, 'https://blog.naver.com/clauds/221491100858'))
-    print(get_sympathy_urls(driver, 'https://blog.naver.com/ryun707/221504109955'))
+    print(get_sympathy_urls(driver, 'https://blog.naver.com/moimoi1357/221473567252'))
