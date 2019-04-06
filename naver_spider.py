@@ -12,6 +12,7 @@ import urllib.parse as urlparse
 import time
 from stopit import ThreadingTimeout as Timeout, TimeoutException
 from mutt_module import send_mail
+import platform
 
 
 class NaverSpider(scrapy.Spider):
@@ -245,9 +246,10 @@ items = []
 class ItemCollectorPipeline(object):
     def __init__(self):
         self.ids_seen = set()
+        self.np_items_cnt = 0
 
     def process_item(self, item, spider):
-        scraped_obj_container = []
+        scraped_obj_container = list()
 
         scraped_obj_container.append(item)
 
@@ -257,11 +259,13 @@ class ItemCollectorPipeline(object):
             else:
                 self.ids_seen.add(scraped_obj['user_id'])
                 items.append(scraped_obj)
+                if not scraped_obj['original_poster']:
+                    self.np_items_cnt += 1
 
         print('scraped object: ' + str(scraped_obj_container) + ' ==> count: ' + str(len(items)))
 
-        # 목표한 아이디 개수가 채워졌으면 크롤러 종료
-        if len(items) >= spider.target_id_count:
+        # 목표한 (유효) 아이디 개수가 채워졌으면 크롤러 종료
+        if self.np_items_cnt >= spider.target_id_count:
             spider.close_down = True
 
 
@@ -302,15 +306,16 @@ if __name__ == "__main__":
     process.start()
 
     end = time.time()
+    time_taken_str = '총 걸린 시간: {0} 초'.format(str(end - start))
 
     all_ids = [item['user_id'] for item in items]
-    np_ids = [item['user_id'] for item in items if item['original_poster'] is not True]
+    np_ids = [item['user_id'] for item in items if not item['original_poster']]
 
     print("Aggregate: " + str(items) + ", length: " + str(len(items)))
     print("Distinct: " + str(all_ids) + ", length: " + str(len(all_ids)))
     print("Non-Poster: " + str(np_ids) + ", length: " + str(len(np_ids)))
 
-    print("Total time taken: " + str(end - start) + " seconds")
+    print(time_taken_str)
 
     search_keyword = '_'.join(keywords_list[0].split(" "))
 
@@ -327,10 +332,30 @@ if __name__ == "__main__":
         for np_id in np_ids:
             f.write('{0}\n'.format(np_id))
 
+    pltfrm = platform.uname()
+    email_msg = """
+    {0}
+    
+    --- 아이디 추출 현황 ---
+    원글 게시자 포함 개수: {7}
+    원글 게시자 제외 개수: {8}
+    
+    --- 시스템 환경 ---
+    System: {1}
+    Node: {2}
+    Release: {3}
+    Version: {4}
+    Machine: {5}
+    Processor: {6}
+    """.format(
+        time_taken_str, pltfrm[0], pltfrm[1], pltfrm[2], pltfrm[3], pltfrm[4], pltfrm[5],
+        len(all_ids), len(np_ids)
+    )
+
     # 결과 파일들 이메일로 전송
     send_mail(
         recipient_list=['etture@gmail.com'],
         subject_line='블로그 아이디 크롤링 - 키워드: "{0}", 타겟: {1}, {2}/{3}/{4} {5}:{6}'.format(search_keyword, id_count, now.tm_year, now.tm_mon, now.tm_mday, hour_str, min_str),
-        message='',
+        message=email_msg,
         attachment_files=[total_file_name, np_file_name]
     )
