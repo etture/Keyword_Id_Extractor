@@ -10,7 +10,7 @@ import naver_crawler
 from bs4 import BeautifulSoup
 import urllib.parse as urlparse
 import time
-from stopit import ThreadingTimeout as Timeout, TimeoutException
+from stopit import ThreadingTimeout, TimeoutException
 from mutt_module import send_mail
 import platform
 
@@ -77,10 +77,11 @@ class NaverSpider(scrapy.Spider):
 
             # 개별 블로그에서 아이디 추출, 글 게시자=True
             try:
-                with Timeout(15.0) as timeout_ctx:
+                with ThreadingTimeout(5.0) as timeout_ctx:
+                    assert timeout_ctx.state == timeout_ctx.EXECUTING
                     yield self.get_id_from_blog(blog_url=blog_url, original_poster=True)
-            except TimeoutException:
-                print('TimeoutException')
+            # except ThreadingTimeout:
+            #     print('ThreadingTimeout')
             except AttributeError:
                 print('AttributeError')
             except NoSuchElementException:
@@ -92,10 +93,11 @@ class NaverSpider(scrapy.Spider):
 
             # 댓글 작성자 블로그 URL 추출
             try:
-                with Timeout(15.0) as timeout_ctx:
+                with ThreadingTimeout(5.0) as timeout_ctx:
+                    assert timeout_ctx.state == timeout_ctx.EXECUTING
                     commenter_urls = self.get_commenter_urls_from_post(blog_url=blog_url)
-            except TimeoutException:
-                print('TimeoutException')
+            # except ThreadingTimeout:
+            #     print('ThreadingTimeout')
             except AttributeError:
                 print('AttributeError')
             except NoSuchElementException:
@@ -109,10 +111,11 @@ class NaverSpider(scrapy.Spider):
 
             # 공감 누른 사람 블로그 URL 추출
             try:
-                with Timeout(15.0) as timeout_ctx:
+                with ThreadingTimeout(5.0) as timeout_ctx:
+                    assert timeout_ctx.state == timeout_ctx.EXECUTING
                     sympathy_urls = self.get_sympathy_urls_from_post(blog_url=blog_url)
-            except TimeoutException:
-                print('TimeoutException')
+            # except ThreadingTimeout:
+            #     print('ThreadingTimeout')
             except AttributeError:
                 print('AttributeError')
             except NoSuchElementException:
@@ -130,11 +133,12 @@ class NaverSpider(scrapy.Spider):
 
                 # 개별 블로그에서 아이디 추출, 글 게시자=False (댓글 작성자이기 때문)
                 try:
-                    with Timeout(15.0) as timeout_ctx:
+                    with ThreadingTimeout(5.0) as timeout_ctx:
+                        assert timeout_ctx.state == timeout_ctx.EXECUTING
                         yield self.get_id_from_blog(blog_url=commenter_url, original_poster=False)
-                except TimeoutException:
-                    print('TimeoutException')
-                    continue
+                # except ThreadingTimeout:
+                #     print('ThreadingTimeout')
+                #     continue
                 except AttributeError:
                     print('AttributeError')
                     continue
@@ -153,11 +157,12 @@ class NaverSpider(scrapy.Spider):
 
                 # 개별 블로그에서 아이디 추출, 글 게시자=False (댓글 작성자이기 때문)
                 try:
-                    with Timeout(15.0) as timeout_ctx:
+                    with ThreadingTimeout(5.0) as timeout_ctx:
+                        assert timeout_ctx.state == timeout_ctx.EXECUTING
                         yield self.get_id_from_blog(blog_url=sympathy_url, original_poster=False)
-                except TimeoutException:
-                    print('TimeoutException')
-                    continue
+                # except ThreadingTimeout:
+                #     print('ThreadingTimeout')
+                #     continue
                 except AttributeError:
                     print('AttributeError')
                     continue
@@ -180,11 +185,12 @@ class NaverSpider(scrapy.Spider):
     def get_id_from_blog(self, blog_url, original_poster=True):
         # 네이버 모듈에서 개별 블로그에서 유저 아이디 찾기 호출
         try:
-            with Timeout(15.0) as timeout_ctx:
+            with ThreadingTimeout(5.0) as timeout_ctx:
+                assert timeout_ctx.state == timeout_ctx.EXECUTING
                 user_id = naver_crawler.get_naver_blog_id(driver=self.driver, blog_url=blog_url)
-        except TimeoutException:
-            print('TimeoutException')
-            raise Timeout
+        # except ThreadingTimeout:
+        #     print('ThreadingTimeout')
+        #     raise ThreadingTimeout
         except AttributeError:
             print('AttributeError')
             raise AttributeError
@@ -202,11 +208,12 @@ class NaverSpider(scrapy.Spider):
 
     def get_commenter_urls_from_post(self, blog_url):
         try:
-            with Timeout(15.0) as timeout_ctx:
+            with ThreadingTimeout(5.0) as timeout_ctx:
+                assert timeout_ctx.state == timeout_ctx.EXECUTING
                 commenter_urls = naver_crawler.get_commenter_urls(driver=self.driver, blog_url=blog_url)
-        except TimeoutException:
-            print('TimeoutException')
-            raise Timeout
+        # except ThreadingTimeout:
+        #     print('ThreadingTimeout')
+        #     raise ThreadingTimeout
         except AttributeError:
             print('AttributeError')
             raise AttributeError
@@ -221,11 +228,12 @@ class NaverSpider(scrapy.Spider):
 
     def get_sympathy_urls_from_post(self, blog_url):
         try:
-            with Timeout(15.0) as timeout_ctx:
+            with ThreadingTimeout(5.0) as timeout_ctx:
+                assert timeout_ctx.state == timeout_ctx.EXECUTING
                 sympathy_urls = naver_crawler.get_sympathy_urls(driver=self.driver, blog_url=blog_url)
-        except TimeoutException:
-            print('TimeoutException')
-            raise Timeout
+        # except ThreadingTimeout:
+        #     print('ThreadingTimeout')
+        #     raise ThreadingTimeout
         except AttributeError:
             print('AttributeError')
             raise AttributeError
